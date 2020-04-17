@@ -9,16 +9,11 @@ pipeline {
         skipStagesAfterUnstable()
     }
   stages {
-    stage('Install Maven') { 
+    stage('Compile') { 
             steps {
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
-    stage('Compile') {
-      steps {
-        sh 'sh \'mvn compile\''
-      }
-    }
 
   }
   environment {
