@@ -9,14 +9,19 @@ pipeline {
     skipStagesAfterUnstable()
     }
   stages {
-    stage('Slack Notification') {
-        slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#shree-test, color: 'good', message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}", teamDomain: 'pragraconsulting2020', tokenCredentialId: 'slack'
-    }
     stage('Compile') { 
       steps {
         sh 'mvn -B -DskipTests compile' 
       }
     }
+    stage('Sonar Analysis') {
+            steps {
+                echo 'Sonar Scanner'
+               	withSonarQubeEnv('sonar65') {
+			    	sh "mvn sonar:sonar"
+			    }
+            }
+        }
     stage('Test') {
       steps {
         sh 'mvn test'
