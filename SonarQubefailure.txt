@@ -1,0 +1,48 @@
+Sonar Scanner
++ mvn sonar:sonar
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Building first-webapp 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- sonar-maven-plugin:3.7.0.1746:sonar (default-cli) @ first-webapp ---
+[INFO] User cache: ?/.sonar/cache
+[INFO] SonarQube version: 8.2.0
+[INFO] Default locale: "en_US", source code encoding: "UTF-8"
+[WARNING] SonarScanner will require Java 11 to run starting in SonarQube 8.x
+[INFO] Load global settings
+[INFO] Load global settings (done) | time=1956ms
+[INFO] Server id: BF41A1F2-AXGJ14LCyd3VDOcfYSAX
+[INFO] User cache: /var/jenkins_home/workspace/javafullstac/?/.sonar/cache
+[INFO] Load/download plugins
+[INFO] Load plugins index
+[INFO] Load plugins index (done) | time=677ms
+[INFO] Load/download plugins (done) | time=114629ms
+[INFO] Process project properties
+[INFO] Process project properties (done) | time=145ms
+[INFO] Execute project builders
+[INFO] Execute project builders (done) | time=91ms
+[INFO] Project key: co.pragra.webapp:first-webapp
+[INFO] Base dir: /var/jenkins_home/workspace/javafullstac
+[INFO] Working dir: /var/jenkins_home/workspace/javafullstac/target/sonar
+[INFO] Load project settings for component key: 'co.pragra.webapp:first-webapp'
+[INFO] Load quality profiles
+[INFO] Load quality profiles (done) | time=9280ms
+[INFO] Detected Jenkins
+[INFO] Load active rules
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 04:24 min
+[INFO] Finished at: 2020-04-19T00:13:36Z
+[INFO] Final Memory: 39M/197M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar (default-cli) on project first-webapp: Unable to load component class org.sonar.scanner.report.ActiveRulesPublisher: Unable to load component interface org.sonar.api.batch.rule.ActiveRules: Fail to request http://192.168.29.110:9000/api/rules/search.protobuf?f=repo,name,severity,lang,internalKey,templateKey,params,actives,createdAt,updatedAt&activation=true&qprofile=AXGJ2veHyd3VDOcfYTpY&ps=500&p=1: timeout: Read timed out -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+script returned exit code 1
