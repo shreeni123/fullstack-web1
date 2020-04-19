@@ -14,14 +14,7 @@ pipeline {
         sh 'mvn -B -DskipTests compile' 
       }
     }
-    stage('Sonar Analysis') {
-            steps {
-                echo 'Sonar Scanner'
-               	withSonarQubeEnv('sonar65') {
-			    	sh "mvn sonar:sonar"
-			    }
-            }
-        }
+ 
     stage('Test') {
       steps {
         sh 'mvn test'
