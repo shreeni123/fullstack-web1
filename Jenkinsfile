@@ -5,15 +5,16 @@ pipeline {
     }
     stages{
         
-        stage('Lint Dockerfile') {
-            steps {
-                sh 'sudo docker run --rm -i hadolint/hadolint < Dockerfile'
-                }
-        }
-        
+                
         stage('Build Docker image') {
             steps {
                 sh 'docker image build -t shreeni123/mvnshree .'
+                }
+        }
+
+        stage('Lint Dockerfile') {
+            steps {
+                sh 'sudo docker run --rm -i hadolint/hadolint < Dockerfile'
                 }
         }
 
