@@ -14,5 +14,10 @@ pipeline {
                 sh 'mvn -B -DskipTests compile'
             }
         }
+        stage('Sonar-Analysis') {
+            withDockerContainer(args: '-d --name sonar65 -p 9000:9000', image: 'sonarqube') {
+                sh "mvn sonar:sonar"
+            }
+        }
     }
 }
