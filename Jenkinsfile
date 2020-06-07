@@ -16,6 +16,7 @@ pipeline {
             }
         }
         stage('Sonar-Analysis') {
+            agent any
             steps {
                 echo 'Sonar Scanner'
                 withSonarQubeEnv('sonar65') {
