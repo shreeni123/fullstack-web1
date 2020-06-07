@@ -1,32 +1,32 @@
 pipeline {
-    agent none
+    agent any
     options {
         skipStagesAfterUnstable()
     }
     stages{
-        stage('Build Docker image') {
-            agent any
+        
+        stage('Lint Dockerfile') {
             steps {
-                sh 'docker image build -t mvnshree .'
-                
-            }
+                sh 'sudo docker run --rm -i hadolint/hadolint < Dockerfile'
+                }
+        }
+        
+        stage('Build Docker image') {
+            steps {
+                sh 'docker image build -t shreeni123/mvnshree .'
+                }
         }
 
         stage('Compile') {
             agent any
             steps {
-                sh 'docker container run -idt --name mvnshree mvnshree mvn -B -DskipTests compile'
+                sh 'docker container run -idt --name mvnshree mvnshree bash'
+                sh 'mvn -B -DskipTests compile'
 
             }
         }
         
         stage('Test') {
-            agent {
-                docker {
-                        image 'maven:3-alpine'
-                        args '-v /root/.m2:/root/.m2'
-                        }
-            }
             steps {
                 sh 'mvn test'
             }
@@ -37,14 +37,13 @@ pipeline {
             }
         }
         stage('Package') {
-            agent {
-                docker {
-                        image 'maven:3-alpine'
-                        args '-v /root/.m2:/root/.m2'
-                        }
-            }
             steps {
                 sh 'mvn package' 
+            }
+        }
+        stage('Destroy container') {
+            steps {
+                sh 'docker container rm -f mvnshree' 
             }
         }
     }
