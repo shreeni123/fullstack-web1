@@ -4,21 +4,22 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages{
+        stage('Build Docker image') {
+            agent any
+            steps {
+                sh 'docker image build -t mvnshree .'
+                
+            }
+        }
+
         stage('Compile') {
             agent any
             steps {
-                sh 'docker image build .'
+                sh 'docker container run -idt --name mvnshree mvnshree mvn -B -DskipTests compile'
+
             }
         }
-        stage('Sonar-Analysis') {
-            agent any
-            steps {
-                echo 'Sonar Scanner'
-                withSonarQubeEnv('sonar65') {
-                    sh "mvn sonar:sonar"
-                }
-            }
-        }
+        
         stage('Test') {
             agent {
                 docker {
