@@ -5,14 +5,9 @@ pipeline {
     }
     stages{
         stage('Compile') {
-            agent {
-                    docker {
-                        image 'maven:3-alpine'
-                        args '-v /root/.m2:/root/.m2'
-                        }
-                }
+            agent any
             steps {
-                sh 'mvn -B -DskipTests compile'
+                sh 'docker image build .'
             }
         }
         stage('Sonar-Analysis') {
